@@ -1,0 +1,40 @@
+<script>
+
+    var clima = "quente";
+    console.log(clima)
+
+    const program = () => {
+        const foo = () => {
+            bar();
+        }
+
+
+        const bar = () => {
+            console.log("Hello world");
+        }
+
+        foo();
+    }
+
+    program();
+
+    class Pessoa {
+        nome;
+        cor;
+        constructor(nome, cor) {
+            this.nome = nome;
+            this.cor = cor;
+        };
+        apanha() {
+            this.grita();
+        }
+        grita() {
+            console.log(`${this.nome} deu um grito`);
+        }
+    }
+
+    const instance = new Pessoa("João Gay", "Preto");
+    console.log(instance);
+    instance.apanha();
+
+</script>
