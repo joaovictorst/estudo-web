@@ -1,0 +1,78 @@
+<script>
+
+    // 1. Declare uma variável de nome weight
+    let weight = "weight";
+    // 2. Que Tipo de dado é a variavel acima?
+    console.log(typeof weight)
+
+
+    /*
+        3. Declare uma variável e atribua valores para cada um dos dados:
+            * name: String
+            * age: Number (integer)
+            * stars: Number (float)
+            * isSubscribed: Boolean
+    */
+
+        let name = 'joao';
+        let age = 20;
+        let stars = 3.14;
+        let isSubscribed = true
+
+    /*
+        4. a variável student abaixo é de que tipo de dados?
+
+        4.1 atribua a ela as memas propriedades e valores do exercício 3.
+
+        4.2 Mostre no console a seguinte mensagem:
+
+            <name> de idade <age> pesa <weight> pelos valores de cada propriedade do objeto
+        
+    */
+    
+    let student = {
+        name: "joao",
+        age : 23,
+        stars : 3.14,
+        isSubscribed : true
+    }
+
+
+    console.log(`${student.name} de idade ${student.age} pesa ${stars}`)
+
+    /*
+        5. Declare uma variável do tipo Array, de nome students e atribua a ela nenhum valor, ou seja, somente o Array vazio
+
+    */
+
+    let students = [];
+
+    /*
+        6. Reatribua o valor para a variável acima, colocando dentro dela o objeto student da questão 4. (Não copiar e colar o objeto, mas usar o objeto criado e inserir ele no Array)
+    */
+
+    students = [
+        student
+    ]
+
+    /*
+        7. Coloque no console o valor da posição zedo do Array acima
+    */
+
+    console.log(students[0]);
+
+    /*
+        8. Crie um novo student e coloque na posição 1 do Array students
+    */
+
+    const student1 = {
+        name : "joao",
+        age : 20,
+        weight : 82.0,
+        isSubscribed: false
+    }
+
+    students[1] = student1;
+
+    console.log(students)
+</script>
