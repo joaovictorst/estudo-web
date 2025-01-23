@@ -1,0 +1,22 @@
+<script>
+
+    //MANIPULANDO ARRAYS
+
+    let techs = ["html", "css", "js"]
+
+    //ADICIONAR UM ITEM NO FIM
+    console.log(techs.push("nodejs"))
+    //ADICIONAR NO COMEÇO
+    techs.unshift("sql")
+    //REMOVER DO FIM
+    techs.pop()
+    //REMOVER DO COMEÇO
+    techs.shift()
+    //PEGAR SOMENTE ALGUNS ELEMENTOS DO ARRAY 
+    console.log(techs.slice(1,3))
+    //REMOVER 1 OU MAIS ITEMS EM QUALQUER POSIÇÃO DO ARRAY
+    techs.splice(1,2)
+    //ENCONTRAR A POSIÇÃO DE UM ELEMENTO NO ARRAY
+    let index = techs.indexOf('css')
+    techs.splice(index,1)
+</script>
