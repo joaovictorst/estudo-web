@@ -1,64 +1,110 @@
-const input = `C;V;can of coke
-S;M;sweatTea()
-S;V;epsonPrinter
-C;M;santa claus
-C;C;mirrorClaus`
+const input = `S;V;iPad
 
-const formatClass = (text) => {
-    text = text.split(/(?=[A-Z])/)
-    for(let i = 0; i < text.length; i++){
-        let upper = text[i][0]
-        text[i] = text[i].slice(1)
-        text[i] = upper.toUpperCase() + text[i]
-    }
-    return text
-};
+C;M;mouse pad
 
-const formatMethod = (operation,text) => {
-    text  = text.split(' ');
-    if(operation = "C"){
-        for(let i = 0; i < text.length; i++){
-            let upper = text[i][0]
-            upper = upper.toUpperCase()
-            console.log(upper)
-            console.log("^^^")
-            console.log(text[i])
+C;C;code swarm
+
+S;C;OrangeHighlighter`
+
+const formatClass = (operation, format, text) => {
+    if (operation == "S") {
+        text = text.split(/(?=[A-Z])/)
+        for (let i = 0; i < text.length; i++) {
+            text[i] = text[i].toLowerCase()
         }
+        return text.join(' ')
+    } else {
+        text = text.split(' ')
+        for (let i = 0; i < text.length; i++) {
+            let upperCase = text[i].split('')
+            text[i].slice(1)
+            text[i] = upperCase[0].toUpperCase() + text[i].slice(1)
+        }
+        return text.join('')
     }
-    return text
 };
 
-const formatVariable = (text) => {
-    text  = text.split(' ');
-    
-    return text
+const formatMethod = (operation, format, text) => {
+    if (operation == "C") {
+        text = text.split(' ')
+        for (let i = text.length - 1; i >= 0; i--) {
+            let string = text[i][0]
+            string = string.toUpperCase()
+            text[i] = text[i].slice(1)
+            text[i] = `${string.toUpperCase()}${text[i]}`
+        }
+        text = text.join('')
+
+        if (text.endsWith('()')) {
+            text.replace('()', '')
+        } else {
+            text = text.concat('', '()')
+        }
+        let stringLowercase = text[0]
+        text = text.slice(1)
+        text = `${stringLowercase.toLowerCase()}${text}`
+        return text
+    } else {
+        text = text.split(/(?=[A-Z])/)
+        for (let i = 0; i < text.length; i++) {
+            text[i] = text[i].toLowerCase();
+        }
+        let lengthElement = text.length - 1
+        if (text[lengthElement].includes("()")) {
+            text[lengthElement] = text[lengthElement].replace(/[()]+/, '');
+        } else {
+            text[lengthElement] = text[lengthElement] + "()";
+        }
+        return text.join(' ')
+    }
 };
 
-const processFormat = (operation,format,text) => {
+const formatVariable = (operation, format, text) => {
+
+    if (operation == 'C') {
+        text = text.split(' ')
+        for (let i = 0; i < text.length; i++) {
+            let upperCase = text[i].split('')
+            text[i].slice(1)
+            text[i] = upperCase[0].toUpperCase() + text[i].slice(1)
+        }
+        let stringLowercas = text[0]
+        stringLowercas = stringLowercas.toLowerCase()
+        text = text.slice(1).join('')
+        text = `${stringLowercas}${text}`
+        return text
+    } else {
+        text = text.split(/(?=[A-Z])/)
+        for (let i = 0; i < text.length; i++) {
+            text[i] = text[i].toLowerCase()
+        }
+        return text.join(' ')
+    }
+};
+
+const processFormat = (operation, format, text) => {
 
     switch (format) {
         case "C":
-            return formatClass(operation,text);
+            return formatClass(operation, format, text)
         case "M":
-            return formatMethod(operation,text);
+            return formatMethod(operation, format, text)
         case "V":
-            return formatVariable(operation,text);
+            return formatVariable(operation, format, text)
     }
 };
 
-const processOperation = (operation,format, text) => {
+const processOperation = (operation, format, text) => {
     switch (operation) {
         case "S":
-            processFormat(format,text)
-            
+            console.log(processFormat(operation, format, text))
+
             // return text.join(" ");
             break
         case "C":
 
-            let prepared = processFormat(format,text);
-            console.log(prepared)
-            
-            
+            console.log(processFormat(operation, format, text))
+
             // return text.join("");
             break
     }
@@ -70,17 +116,14 @@ function processData(input) {
     let contentSplited = []
     let i = 0
     content.forEach((element) => {
-       contentSplited[i] = element.split(";")
+        contentSplited[i] = element.split(";")
         i++
     })
     contentSplited.forEach((index) => {
-        const [operation,format,text] = index
-        // console.log(operation);
-        // console.log(format);
-        // console.log(text);
+        const [operation, format, text] = index
 
-        processOperation(operation,format,text)
-        
+        processOperation(operation, format, text)
+
     })
 }
 
