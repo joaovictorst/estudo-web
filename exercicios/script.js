@@ -1,16 +1,71 @@
-const input = `S;M;plasticCup()
+const input = `C;V;can of coke
+S;M;sweatTea()
+S;V;epsonPrinter
+C;M;santa claus
+C;C;mirrorClaus`
 
-C;V;mobile phone
+const formatClass = (text) => {
+    text = text.split(/(?=[A-Z])/)
+    for(let i = 0; i < text.length; i++){
+        let upper = text[i][0]
+        text[i] = text[i].slice(1)
+        text[i] = upper.toUpperCase() + text[i]
+    }
+    return text
+};
 
-C;C;coffee machine
+const formatMethod = (operation,text) => {
+    text  = text.split(' ');
+    if(operation = "C"){
+        for(let i = 0; i < text.length; i++){
+            let upper = text[i][0]
+            upper = upper.toUpperCase()
+            console.log(upper)
+            console.log("^^^")
+            console.log(text[i])
+        }
+    }
+    return text
+};
 
-S;C;LargeSoftwareBook
+const formatVariable = (text) => {
+    text  = text.split(' ');
+    
+    return text
+};
 
-C;M;white sheet of paper
+const processFormat = (operation,format,text) => {
 
-S;V;pictureFrame`
+    switch (format) {
+        case "C":
+            return formatClass(operation,text);
+        case "M":
+            return formatMethod(operation,text);
+        case "V":
+            return formatVariable(operation,text);
+    }
+};
+
+const processOperation = (operation,format, text) => {
+    switch (operation) {
+        case "S":
+            processFormat(format,text)
+            
+            // return text.join(" ");
+            break
+        case "C":
+
+            let prepared = processFormat(format,text);
+            console.log(prepared)
+            
+            
+            // return text.join("");
+            break
+    }
+};
 
 function processData(input) {
+    input.trim()
     let content = input.split(/[\r\n]+/)
     let contentSplited = []
     let i = 0
@@ -18,26 +73,21 @@ function processData(input) {
        contentSplited[i] = element.split(";")
         i++
     })
-    
-    contentSplited.forEach((element) =>{
-        let i = 0
-        while(i < 3){
-            if(i = 2){
-               element[i] = element[i].split(/(?=[A-Z])/)
-            }
-            i++
-        }
-        switch(element[0]){
-            case 'S':
-                console.log(element[2].join(' '))
-                break
-            case "C":     
-            console.log(element[2][0].replace(" ",""))   
-        }
+    contentSplited.forEach((index) => {
+        const [operation,format,text] = index
+        // console.log(operation);
+        // console.log(format);
+        // console.log(text);
+
+        processOperation(operation,format,text)
+        
     })
-    
-    
-} 
+}
+
+
+process.stdin.on("end", function () {
+    console.log(processData(_input));
+});
 
 process.stdin.resume();
 process.stdin.setEncoding("ascii");
